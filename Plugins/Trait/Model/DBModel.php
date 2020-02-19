@@ -1,11 +1,6 @@
 <?php 
 	trait DBModel{
-	
-		protected $host = "localhost";
-		protected $user = "root";
-		protected $pass = "";
-		protected $table = "game_db";
-	
+		
 		public function setDna(){
 			$time=time();
 			$date=date("Ymd",$time);
@@ -14,25 +9,29 @@
 			return $setID;
 		}
 		
-		public function dbCon(){
-			$con = mysqli_connect($this->host, $this->user, $this->pass, $this->table);
-			return $con;
-		}
-		
-		public function select($sql){
-			$mysqli = new mysqli($this->host, $this->user, $this->pass, $this->table);
+		public function db($sql){
+			$mysqli = new mysqli(
+			set::config('db_host'), 
+			set::config('db_user'), 
+			set::config('db_password'), 
+			set::config('db_table')
+			);
 			$mysqli->set_charset("utf8");
 			$query = $mysqli->query($sql);
 			if(!$mysqli->query($sql)){
 				printf("Error message: %s\n", $mysqli->error);
 				exit;
-			} else {
-				$dbdata = array();
-				while($fetch = mysqli_fetch_assoc($query)){
-					$dbdata[]=$fetch;
-				}
-				return $dbdata;
+				} else {
+				return $query;
 			}
+		}
+		
+		public function select($sql){
+			$dbdata = array();
+			while($fetch = mysqli_fetch_assoc($this->db($sql))){
+				$dbdata[]=$fetch;
+			}
+			return $dbdata;
 		}
 		
 		public function selectOne($sql){
@@ -41,14 +40,8 @@
 			return $getPop;
 		}
 		
-		public function db($sql){
-			$query = mysqli_query(self::dbCon(), $sql);
-			return $query;
-		}
-		
 		public function dbRow($sql){
-			$query = mysqli_query(self::dbCon(), $sql);
-			$rowcount = mysqli_num_rows($query);
+			$rowcount = mysqli_num_rows($this->db($sql));
 			return $rowcount;
 		}
 		
@@ -81,7 +74,7 @@
 					if(is_numeric ($key)){
 						$getColWithNumber = $this->dbColumns($key, $TableName);
 						$WhereString .= ' '.$getColWithNumber.'="'.$value.'" AND';
-					}else{
+						}else{
 						$WhereString .= ' '.$key.'="'.$value.'" AND';
 					}
 				}
@@ -98,17 +91,17 @@
 					if($value === true){
 						$OrderSort = 'ASC';
 						$separator = ' ';
-						} elseif($value === false) {
+					} elseif($value === false) {
 						$OrderSort = 'DESC';
 						$separator = ' ';
-						} else{
-						$OrderSort=$value;
+					} else{
+						$OrderSort='"'.htmlspecialchars($value).'"';
 						$separator = '=';
 					}
 					if(is_numeric ($key)){
 						$getColWithNumber = $this->dbColumns($key, $TableName);
 						$OrderString .= ' '.$getColWithNumber.$separator.$OrderSort.',';
-						}else{
+					}else{
 						$OrderString .= ' '.$key.$separator.$OrderSort.',';
 					}
 				}
@@ -154,7 +147,7 @@
 			return $Result;
 		}
 		
-		public function dbsSum($Sum, $tableName, $where, $order, $limit){
+		public function dbsSum($Sum, $tableName, $where, $order, $limit, $debugMode = false){
 			$Result = 'SELECT SUM('.$Sum.') AS '.$Sum.' FROM ';
 			if(is_array($tableName)){
 				$Result .= $this->dbJoin($tableName);
@@ -164,8 +157,93 @@
 			$Result .= $this->dbWhere($where, $tableName);
 			$Result .= $this->dbSort($order);
 			$Result .= $this->dbLimit($limit);
-			$ResultSelect = $this->selectOne($Result);
-			return $ResultSelect[$Sum];
+			if($debugMode){
+				echo $Result;
+				exit;
+			} else {
+				$ResultSelect = $this->selectOne($Result);
+				return $ResultSelect[$Sum];
+			}
+		}
+		
+		public function dbu($tableName, $set, $Where, $debugMode = false){
+			$Result = 'UPDATE ';
+			if(is_array($tableName)){
+				$Result .= $this->dbJoin($tableName);
+				} else {
+				$Result .= $tableName;
+			}
+			$ConvertToSet = $this->dbSort($set);
+			$Result .= str_replace(' ORDER BY ',' SET',$ConvertToSet);
+			$Result .= $this->dbWhere($Where, $tableName);
+			if($debugMode){
+				echo $Result;
+				exit;
+			} else {
+				return $this->db($Result);
+			}
+		}
+		
+		public function dbd($tableName, $Where, $order, $limit, $debugMode = false){
+			$Result = 'DELETE FROM ';
+			if(is_array($tableName)){
+				$Result .= $this->dbJoin($tableName);
+				} else {
+				$Result .= $tableName;
+			}
+			$Result .= $this->dbWhere($Where, $tableName);
+			$Result .= $this->dbSort($order);
+			$Result .= $this->dbLimit($limit);
+			if($debugMode){
+				echo $Result;
+				exit;
+			} else {
+				return $this->db($Result);
+			}
+		}
+		
+		public function dbiAttr($data, $remove){
+			if($data){
+				foreach($data as $key=>$value)
+				{
+					if($remove){
+						$backRemove = ''.htmlspecialchars($value).', ';
+					} else {
+						$backRemove = '"'.htmlspecialchars($value).'", ';
+					}
+					$columnCode .= $backRemove;
+				}
+				$getStringColum = substr_replace($columnCode, "", -2);
+				
+				return $getStringColum;
+			} else {
+				return false;
+			}
+		}
+		
+		public function dbi($tableName, $column, $value, $debugMode = false){
+			$Result = 'INSERT INTO '.$tableName.' (';
+			$Result .= $this->dbiAttr($column, true).' ) VALUES (';
+			$Result .= $this->dbiAttr($value, false).' )';
+			if($debugMode){
+				echo $Result;
+				exit;
+			} else {
+				return $this->db($Result);
+			}
+		}
+		
+		public function getUserByID($colum){
+			if($_SESSION['UserID']){
+				$sqlResult = $this->dbsOne('Auth', ['auth_id'=>$_SESSION['UserID']], []);
+				if($colum){
+					return $sqlResult[$colum];
+					} else {
+					return $sqlResult;
+				}
+			} else {
+				exit;
+			}
 		}
 		
 		public function dbs($tableName, $where, $order, $limit){
@@ -188,72 +266,4 @@
 			return $this->select( $this->dbsCode($tableName, $where, $order, $limit) );
 		}
 		
-		public function dbu($tableName, $set, $Where){
-			$Result = 'UPDATE ';
-			if(is_array($tableName)){
-				$Result .= $this->dbJoin($tableName);
-				} else {
-				$Result .= $tableName;
-			}
-			$ConvertToSet = $this->dbSort($set);
-			$Result .= str_replace(' ORDER BY ',' SET',$ConvertToSet);
-			$Result .= $this->dbWhere($Where, $tableName);
-			return $this->db($Result);
-		}
-		
-		public function dbd($tableName, $Where, $order, $limit){
-			$Result = 'DELETE FROM ';
-			if(is_array($tableName)){
-				$Result .= $this->dbJoin($tableName);
-				} else {
-				$Result .= $tableName;
-			}
-			$Result .= $this->dbWhere($Where, $tableName);
-			$Result .= $this->dbSort($order);
-			$Result .= $this->dbLimit($limit);
-			//echo $Result;
-			return $this->db($Result);
-		}
-		
-		public function dbiAttr($data){
-			if($data){
-				foreach($data as $key=>$value)
-				{
-					$columnCode .= htmlspecialchars($value).', ';
-				}
-				$getStringColum = substr_replace($columnCode, "", -2);
-				
-				return $getStringColum;
-			} else {
-				return false;
-			}
-		}
-		
-		public function dbi($tableName, $column, $value){
-			$Result = 'INSERT INTO '.$tableName.' (';
-			$Result .= $this->dbiAttr($column).' ) VALUES (';
-			$Result .= $this->dbiAttr($value).' )';
-			echo $Result;
-			exit;
-			$isResult = $this->db($Result);
-			if($isResult){
-				return $isResult;
-			} else {
-				return $Result;
-			}
-		}
-		
-		public function getUserByID($colum){
-			if($_SESSION['UserID']){
-				$sqlResult = $this->dbsOne('Auth', ['auth_id'=>$_SESSION['UserID']], []);
-				if($colum){
-					return $sqlResult[$colum];
-					} else {
-					return $sqlResult;
-				}
-				} else {
-				exit;
-			}
-		}
-		
-	}										
+	}													

@@ -1,3 +1,1 @@
-<div class="body">
-	
-</div>
+Hello world

@@ -1,3 +1,3 @@
 $( document ).ready(function() {
-	run('Index' ,{});
+	run();
 });

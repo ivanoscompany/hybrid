@@ -50,7 +50,6 @@
 		
 		public static function Short($data, $massive){
 			$prefixError = 'Function "Short" ERROR >';
-			//if(count($dataExpolde) ){}
 			$dataExpolde = explode("-",$data);
 			if(count($dataExpolde) == 2){
 				if($dataExpolde[0] == 'm'){
@@ -76,13 +75,13 @@
 			}
 		}
 		
-		public static function pageNotFound($name){
-			return "<b>ERROR</b> > Plugin with name: <b> $name </b> doesn't not exist";
+		public static function config($data){
+			$ini = parse_ini_file('../Config.ini');
+			return $ini[$data];
 		}
 		
-		public static function privateAccess(){
-			echo "<b>Аccess denied</b> > Тrying to access a private object!";
-			exit;
+		public static function pageNotFound($name){
+			return "<b>ERROR</b> > Plugin with name: <b> $name </b> doesn't not exist";
 		}
 	}
 ?>
