@@ -1,6 +1,25 @@
 <?php 
-	require_once('../Core/custom.php');
-	class set extends custom{
+	class set{
+		
+		public function __construct(){
+		    $getUrl = self::getData();
+			if($getUrl[0] == ""){
+				self::Controller();
+			} else {
+				self::Controller('Request', '', '', self::getData(true));
+			}
+		}
+		
+		public static function getData($type = false){
+			$getUrl = explode("/",$_SERVER['REQUEST_URI']);
+			$ResultShift = array_shift($getUrl);
+			$dataJson = json_encode($getUrl);
+			if($type){
+			   return $dataJson;
+			} else {
+			    return $getUrl;
+			}
+		}
 		
 		public static function Post($Value){
 			$Method = $_POST[$Value];
@@ -16,7 +35,7 @@
 					${$key} = $value;
 				}
 			}
-			$Path = '../Plugins/'.$PluginName.'/'.$Folder.'/'.$FileName.'.php';
+			$Path = __DIR__.'/Plugins/'.$PluginName.'/'.$Folder.'/'.$FileName.'.php';
 			if($Type){
 				require_once($Path);
 				} else {
@@ -24,8 +43,16 @@
 			}
 		}
 		
-		public static function Controller($PluginName, $ControllerName, $Method, $Data){
-			session_start();
+		public static function Controller($PluginName = 'Index', $ControllerName = 'index', $Method = 'run', $Data = ''){
+			if($ControllerName == ''){
+				$ControllerName = 'index';	
+			}
+			if($Method == ''){
+				$Method = 'run';	
+			}
+			if($Data == ''){
+				$Data = '';	
+			}
 			$json = str_replace('&quot;', '"', $Data);
 			$getData = json_decode($json, true);
 			define("p",$PluginName);
@@ -42,7 +69,7 @@
 		public static function View($PluginName, $ViewName, $Data){
 			if($PluginName === true){
 				$getPluginName = constant("p");
-			} else {
+				} else {
 				$getPluginName = $PluginName;
 			}
 			self::bot(false, 'View', $getPluginName, $ViewName, $Data);
@@ -55,28 +82,28 @@
 				if($dataExpolde[0] == 'm'){
 					if($dataExpolde[1]){
 						$nameModel = $dataExpolde[1];
-					} else {
+						} else {
 						$nameModel = 'Model';
 					}
 					self::Model(constant("p"), $nameModel);
-				}elseif($dataExpolde[0] == 'v'){
+					}elseif($dataExpolde[0] == 'v'){
 					if($dataExpolde[1]){
 						$nameView = $dataExpolde[1];
-					} else {
+						} else {
 						$nameView = 'index';
 					}
 					self::View(constant("p"), $nameView, $massive);
-				}else{
+					}else{
 					echo  $prefixError.' Not the right choice of type';
 				}
-			} else {
+				} else {
 				echo  $prefixError.' Incorrect parameter form';
 				exit;
 			}
 		}
 		
 		public static function config($data){
-			$ini = parse_ini_file('../Config.ini');
+			$ini = parse_ini_file('../Core/Config.ini');
 			return $ini[$data];
 		}
 		
@@ -84,4 +111,4 @@
 			return "<b>ERROR</b> > Plugin with name: <b> $name </b> doesn't not exist";
 		}
 	}
-?>
+?>	

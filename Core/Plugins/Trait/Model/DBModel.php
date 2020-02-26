@@ -3,41 +3,23 @@
 		
 		public function setDna(){
 			$time=time();
-			$date=date("Ymd",$time);
-			$rand=rand(1,1000);
+			$rand=rand(1,99999);
 			$setID = $rand.$time.$date;
 			return $setID;
 		}
 		
-		public function db($sql){
-			$mysqli = new mysqli(
-			set::config('db_host'), 
-			set::config('db_user'), 
-			set::config('db_password'), 
-			set::config('db_table')
-			);
+		public function db($sql, $fetch = false){
+			$mysqli = new mysqli(set::config('db_host'), set::config('db_user'), set::config('db_password'), set::config('db_table'));
 			$mysqli->set_charset("utf8");
-			$query = $mysqli->query($sql);
-			if(!$mysqli->query($sql)){
-				printf("Error message: %s\n", $mysqli->error);
+			if($mysqli->query($sql)){ 
+				if($fetch == true){
+					$result = $mysqli->query($sql)->fetch_all(MYSQLI_ASSOC);
+					return $result;
+				}
+			} else { 
+				printf("Error message: %s\n", $mysqli->error); 
 				exit;
-				} else {
-				return $query;
 			}
-		}
-		
-		public function select($sql){
-			$dbdata = array();
-			while($fetch = mysqli_fetch_assoc($this->db($sql))){
-				$dbdata[]=$fetch;
-			}
-			return $dbdata;
-		}
-		
-		public function selectOne($sql){
-			$Result = self::select($sql);
-			$getPop = array_pop($Result);
-			return $getPop;
 		}
 		
 		public function dbRow($sql){
@@ -166,7 +148,7 @@
 			}
 		}
 		
-		public function dbu($tableName, $set, $Where, $debugMode = false){
+		public function dbu($tableName, $set, $Where = "", $debugMode = false){
 			$Result = 'UPDATE ';
 			if(is_array($tableName)){
 				$Result .= $this->dbJoin($tableName);
@@ -184,7 +166,7 @@
 			}
 		}
 		
-		public function dbd($tableName, $Where, $order, $limit, $debugMode = false){
+		public function dbd($tableName, $Where = "", $order = "", $limit = "", $debugMode = false){
 			$Result = 'DELETE FROM ';
 			if(is_array($tableName)){
 				$Result .= $this->dbJoin($tableName);
@@ -222,8 +204,8 @@
 		}
 		
 		public function dbi($tableName, $column, $value, $debugMode = false){
-			$Result = 'INSERT INTO '.$tableName.' (';
-			$Result .= $this->dbiAttr($column, true).' ) VALUES (';
+			$Result = 'INSERT INTO '.$tableName.' ('.$tableName.'_id, ';
+			$Result .= $this->dbiAttr($column, true).' ) VALUES ('.$this->setDna().', ';
 			$Result .= $this->dbiAttr($value, false).' )';
 			if($debugMode){
 				echo $Result;
@@ -246,24 +228,12 @@
 			}
 		}
 		
-		public function dbs($tableName, $where, $order, $limit){
-			return $this->select( $this->dbsCode($tableName, $where, $order, $limit) );
-		}
-		
-		public function dbsOne($tableName, $where, $order){
-			return $this->selectOne( $this->dbsCode($tableName, $where, $order, $limit) );
+		public function dbs($tableName, $where = "", $order = "", $limit = ""){
+			return $this->db( $this->dbsCode($tableName, $where, $order, $limit), true );
 		}
 		
 		public function dbsRow($tableName, $where, $order){
 			return $this->dbRow( $this->dbsCode($tableName, $where, $order, $limit) );
-		}
-		
-		public function dbsWhile($tableName){
-			return $this->select( $this->dbsCode($tableName, $where, $order, $limit) );
-		}
-		
-		public function dbsWhere($tableName, $where){
-			return $this->select( $this->dbsCode($tableName, $where, $order, $limit) );
 		}
 		
 	}													

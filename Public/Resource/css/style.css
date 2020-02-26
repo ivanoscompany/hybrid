@@ -1,0 +1,41 @@
+.elem > span
+{
+	display: block;
+	cursor: pointer;
+	height: 164px;
+	width: 164px;
+	background-size: auto 164px;
+	background-repeat: no-repeat;
+	float: left;
+	background-position: top center;
+}
+#fileupload
+{
+	display: none;
+}
+.fileupload-lable
+{
+	height: 128px;
+	width: 128px;
+	margin: 13px;
+}
+.fileupload-lable:hover
+{
+	background-color: rgba(219, 219, 219, 0.632);
+	cursor: pointer;
+}
+.deleteButtonIMG
+{
+	margin-top: 142px;
+	background-color: #464646;
+	color: #FFFFFF;
+	height: 22px;
+	width: 100%;
+	line-height: 0;
+	/*+border-radius: 0;*/
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	-khtml-border-radius: 0;
+	border-radius: 0;
+	border: 0px solid black;
+}
