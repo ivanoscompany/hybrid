@@ -1,0 +1,73 @@
+/*----------------------------------------*/
+/*  16 - Components - List Product
+/*----------------------------------------*/
+/* ---JB's List Product Area--- */
+.jb-list-product_area {
+	padding-top: 60px;
+	@include breakpoint (max-medium) {
+		[class*="col-"] {
+			padding-top: 38px;
+			&:first-child {
+				padding-top: 0;
+			}
+			&:last-child {
+				padding-bottom: 42px;
+			}
+		}
+	}
+	/* ---Home 4 Decreasing Space For This Section--- */
+	&.spacing-decreases {
+		.jb-list-product_slider {
+			&:last-child {
+				margin-bottom: -60px;
+				@include breakpoint (max-medium) {
+					margin-bottom: 0;
+				}
+			}
+		}
+		[class*="col-"] {
+			&:last-child {
+				@include breakpoint (max-small) {
+					margin-bottom: -60px;
+				}
+			}
+		}
+	}
+}
+
+/* ---JB's List Product Slider--- */
+.jb-list-product_slider {
+	.jb-slide-item {
+		.jb-single_product {
+			float: left;
+			width: 100%;
+			padding-top: 30px;
+			.product-img {
+				float: left;
+				width: 80px;
+			}
+			.jb-product_content {
+				overflow: hidden;
+				padding-left: 25px;
+				.product-name {
+					> h6 {
+						font-weight: $body-font_weight;
+					}
+				}
+				.price-box {
+					padding-top: 10px;
+					@include new-price;
+					@include old-price;
+				}
+			}
+		}
+	}
+	.slick-slide {
+		&:last-child {
+			padding-bottom: 45px;
+			@include breakpoint (max-medium) {
+				padding-bottom: 5px;
+			}
+		}
+	}
+}

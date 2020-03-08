@@ -1,0 +1,35 @@
+/*----------------------------------------*/
+/*  20 - Components - Breadcrumb
+/*----------------------------------------*/
+.breadcrumb-area {
+	padding: 20px 0 0;
+	@include breakpoint (max-small) {
+		padding-top: 0;
+	}
+	.breadcrumb-content {
+		padding-bottom: 20px;
+		border-bottom: 1px solid $border-color;
+		li {
+			color: $hover-color;
+			display: inline-block;
+			font-size: 14px;
+			margin-right: 28px;
+			position: relative;
+			&:before {
+				content: "\f054";
+				font-family: 'Font Awesome 5 Free';
+				font-weight: 600;
+				position: absolute;
+				right: -15px;
+				top: 2px;
+				font-size: 10px;
+				color: $body-text_color;
+			}
+			&:last-child {
+				&:before {
+					display: none;
+				}
+			}
+		}
+	}
+}

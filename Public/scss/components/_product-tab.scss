@@ -1,0 +1,331 @@
+/*----------------------------------------*/
+/*  14 - Components - Product Tab
+/*----------------------------------------*/
+/* ---JB's Product Tab Area--- */
+.jb-product-tab_area {
+	padding-top: 60px;
+}
+/* ---JB's Product Tab Area Two--- */
+.jb-product-tab_area-2 {
+	padding-top: 60px;
+	width: 100%;
+}
+
+/* ---Tab Content & Pane Fix--- */
+.tab-content {
+	width: 100%;
+	.tab-pane {
+		display: block;
+		height: 0;
+		max-width: 100%;
+		visibility: hidden;
+		overflow: hidden;
+		opacity: 0;
+		&.active {
+			height: auto;
+			visibility: visible;
+			opacity: 1;
+			overflow: visible;
+		}
+	}
+}
+
+/* ---JB's Product Tab---*/
+.product-tab {
+	> .product-menu {
+		border-bottom: 1px solid $border-color;
+		padding-bottom: 20px;
+		> li {
+			margin-right: 55px;
+			@include breakpoint (max-small) {
+				margin-right: 25px;
+			}
+			@include breakpoint (x-small) {
+				margin-right: 15px;
+			}
+			@include breakpoint (xx-small) {
+				margin-right: 0;
+				width: 100%;
+				padding-bottom: 20px;
+				text-align: center;
+				&:last-child {
+					padding-bottom: 0;
+				}
+			}
+			> a {
+				&.active {
+					font-weight: bold;
+				}
+				> span {
+					font-size: 24px;
+					line-height: 1;
+					text-transform: uppercase;
+					display: block;
+					@include transition-2;
+					@include breakpoint (max-small) {
+						font-size: 18px;
+					}
+					@include breakpoint (x-small) {
+						font-size: 16px;
+					}
+				}
+			}
+		}
+	}
+}
+
+/* ---JB's Product Tab Two--- */
+.product-tab-2 {
+	border-bottom: 1px solid $border-color;
+	.product-tab_heading {
+		display: inline-block;
+		@include breakpoint (xx-small) {
+			display: block;
+			text-align: center;
+		}
+		> h4 {
+			margin-bottom: 0;
+			padding-bottom: 20px;
+		}
+	}
+	.product-menu {
+		border-bottom: none;
+		display: inline-flex;
+		float: right;
+		padding-right: 85px;
+		@include breakpoint (max-small) {
+			float: unset;
+		}
+		@include breakpoint (xx-small) {
+			float: unset;
+			padding-right: 0;
+		}
+		> li {
+			padding-right: 25px;
+			> a {
+				> span {
+					font-size: 18px;
+					text-transform: capitalize;
+				}
+			}
+		}
+	}
+}
+
+/* ---JB's Tab Content---*/
+.jb-tab_content {
+	padding-top: 30px;
+	margin-bottom: -20px;
+	@include breakpoint (max-normal) {
+		margin-bottom: 0;
+	}
+}
+
+/* ---JB's Spacing Between Two Row---*/
+.jb-product-tab_slider {
+	.slick-slide div:first-child .jb-slide-item {
+		margin-bottom: 60px;
+	}
+}
+
+/* ---JB's Product Tab Slider---*/
+.jb-product-tab_slider,
+.jb-product-tab_slider-2,
+.shop-products-wrapper,
+.jb-product_slider {
+	.slick-list {
+		@include breakpoint (medium) {
+			margin-right: 2px;
+		}
+	}
+	.jb-slide-item {
+		position: relative;
+		padding: 0 20px;
+		&:before {
+			content: "";
+			position: absolute;
+			background: $border-color;
+			height: 380px;
+			width: 1px;
+			top: 0;
+			right: 0;
+			@include breakpoint (medium) {
+				&:nth-child(3n) {
+					display: none;
+				}
+			}
+			@include breakpoint (max-small) {
+				display: none;
+			}
+		}
+		.jb-single_product {
+			.product-img {
+				position: relative;
+				> a {
+					> img {
+						width: 100%;
+						display: block;
+						overflow: hidden;
+					}
+				}
+			}
+			.quick-view-btn {
+				@include absCenter;
+				width: 40px;
+				height: 40px;
+				line-height: 45px;
+				text-align: center;
+				background-color: $hover-color;
+				color: $bg-white_color;
+				border-radius: $jb-border_radius;
+				@include transition;
+				opacity: 0;
+				visibility: hidden;
+				&:hover {
+					background-color: $body-text_color;
+					color: $bg-white_color !important;
+				}
+			}
+			&:hover {
+				.product-img {
+					.quick-view-btn {
+						opacity: 1;
+						visibility: visible;
+					}
+				}
+				.jb-product_content {
+					.add-actions {
+						> ul {
+							> li {
+								> a {
+									opacity: 1;
+									visibility: visible;
+								}
+							}
+						}
+					}
+				}
+			}
+			.jb-product_content {
+				text-align: center;
+				padding-top: 20px;
+				.product-desc_info {
+					.manufacturer {
+						padding-bottom: 15px;
+					}
+					h6 {
+						font-weight: 600;
+						margin: 0;
+						padding-bottom: 18px;
+						> a {
+							&.product-name {
+								@include breakpoint (max-normal) {
+									text-overflow: ellipsis;
+									white-space: nowrap;
+									overflow: hidden;
+									display: block;
+								}
+							}
+						}
+					}
+					.rating-box {
+						padding-bottom: 13px;
+						> ul {
+							> li {
+								display: inline-block;
+								> i {
+									font-size: 11px;
+								}
+							}
+						}
+					}
+					.price-box {
+						padding-bottom: 15px;
+						@include old-price;
+						@include new-price;
+					}
+				}
+				.add-actions {
+					> ul {
+						> li {
+							display: inline-block;
+							> a {
+								width: 40px;
+								height: 40px;
+								line-height: 40px;
+								display: block;
+								border-radius: $jb-border_radius;
+								border: 1px solid $border-color;
+								opacity: 0;
+								visibility: hidden;
+								text-transform: uppercase;
+								@include breakpoint (max-normal) {
+									width: 25px;
+									height: 25px;
+									line-height: 26px;
+									font-size: 13px;
+								}
+								&.jb-add_cart {
+									width: 120px;
+									opacity: 1;
+									visibility: visible;
+									@include breakpoint (max-normal) {
+										width: 100px;
+									}
+								}
+							}
+							&:hover {
+								> a {
+									border-color: $hover-color;
+									background-color: $hover-color;
+									color: $bg-white_color !important;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/* ---JB's Product Tab Slider Dots--- */
+.jb-product-tab_slider,
+.jb-product-tab_slider-2,
+.jb-blog_slider,
+.jb-special-product_area-2,
+.jb-category-product_slider,
+.jb-single-blog_slider,
+.jb-product_slider {
+	@include jb-slick_dots;
+	.slick-dots {
+		top: 0;
+		right: 0;
+		left: auto;
+		transform: translate(0, -83px);
+		padding: 0;
+		@include breakpoint (max-x_small) {
+			display: none !important;
+		}
+		li {
+			display: inline-block;
+			margin: 0 3px;
+			cursor: pointer;
+			font-size: 0;
+			width: 10px;
+			height: 10px;
+			background: transparent;
+			border: 1px solid $hover-color;
+			border-radius: 100%;
+			transition: all 300ms ease-in;
+			&.slick-active {
+				background-color: $hover-color;
+				width: 25px;
+				border-radius: 4px;
+			}
+			&:hover {
+				background-color: $hover-color;
+			}
+		}
+	}
+}

@@ -1,0 +1,122 @@
+/*----------------------------------------*/
+/*  10 - Components - Button
+/*----------------------------------------*/
+
+/* --JB's Search Button-- */
+.jb-search_btn {
+	background: transparent;
+	border: 0;
+	position: absolute;
+	right: 10px;
+	top: 15px;
+	color: $input-placeholder_color;
+	&:hover {
+		color: $hover-color;
+	}
+}
+
+/* ---JB's Button Position--- */
+// Center
+.jb-btn-ps_center {
+	display: flex;
+	justify-content: center;
+	&.jb-btn-ps_left {
+		justify-content: flex-start;
+	}
+}
+
+/* --JB's Button-- */
+.jb-btn,
+.jb-btn-bondi_blue,
+.jb-btn_fullwidth,
+.jb-compare_btn,
+.jb-filter_btn,
+.jb-btn_dark {
+	background-color: $bg-white_color;
+	width: 155px;
+	height: 60px;
+	line-height: 65px;
+	border-radius: 4px;
+	display: block;
+	font-size: 16px;
+	font-weight: 900;
+	text-align: center;
+	@include breakpoint (max-small) {
+		width: 140px;
+		height: 50px;
+		line-height: 55px;
+		font-size: 14px;
+	}
+	&:hover {
+		background-color: $hover-color;
+		color: $bg-white_color !important;
+	}
+}
+
+/* ---JB's Button With Color Variation--- */
+.jb-btn-bondi_blue {
+	background-color: $hover-color;
+	color: $bg-white_color;
+	&:hover {
+		background-color: $body-text_color;
+		color: $bg-white_color !important;
+	}
+}
+.jb-btn_dark {
+	background: $body-text_color;
+	color: $bg-white_color;
+	width: 150px;
+	height: 40px;
+	line-height: 41px;
+	font-weight: 600;
+	border: 0;
+}
+/* ---JB's Button With Various Sizes--- */
+.jb-btn_fullwidth {
+	background-color: $dim-gray_color;
+	width: 100%;
+	color: $bg-white_color;
+	text-transform: uppercase;
+}
+// Small Size
+.jb-btn_sm {
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	font-size: 13px;
+	font-weight: $body-font_weight;
+}
+/* ---JB's Other Button--- */
+.jb-compare_btn {
+	background: $hover-color;
+	color: $bg-white_color;
+	height: 40px;
+	line-height: 43px;
+	font-size: 14px;
+	&:hover {
+		background-color: $body-text_color;
+	}
+}
+.fb-filter-btn_area {
+	padding-top: 30px;
+	.jb-filter_btn {
+		background-color: $body-text_color;
+		color: $bg-white_color;
+		display: block;
+		width: 120px;
+		height: 40px;
+		line-height: 40px;
+		font-size: 14px;
+		font-weight: $body-font_weight;
+		border-radius: 0;
+		&:before {
+			content: "\f00d";
+			font-family: 'Font Awesome 5 Free';
+			font-weight: 600;
+			padding-right: 10px;
+		}
+		&:hover {
+			background-color: $hover-color;
+		}
+	}
+}

@@ -1,0 +1,349 @@
+/*----------------------------------------*/
+/*  12 - Components - Banner
+/*----------------------------------------*/
+/* ---Section Spacing--- */
+.section-space {
+	margin-top: 60px !important;
+}
+/* ---JB's Banner Area--- */
+.jb-banner_area,
+.jb-sidebar_banner {
+	.banner-item {
+		position: relative;
+		overflow: hidden;
+		a {
+			img {
+				width: 100%;
+				@include transition;
+			}
+		}
+		&:before {
+			background: rgba(255, 255, 255, 0.41) none repeat scroll 0 0;
+			content: "";
+			height: 0;
+			left: 0;
+			margin: auto;
+			opacity: 1;
+			-moz-opacity: 1;
+			-khtml-opacity: 1;
+			-webkit-opacity: 1;
+			position: absolute;
+			top: 0;
+			width: 0;
+			pointer-events: none;
+		}
+		&:after {
+			background: rgba(255, 255, 255, 0.41) none repeat scroll 0 0;
+			bottom: 0;
+			content: "";
+			height: 0;
+			opacity: 1;
+			-moz-opacity: 1;
+			-khtml-opacity: 1;
+			-webkit-opacity: 1;
+			position: absolute;
+			right: 0;
+			width: 0;
+			pointer-events: none;
+		}
+		&:hover {
+			&:before {
+				height: 100%;
+				opacity: 0;
+				-moz-opacity: 0;
+				-khtml-opacity: 0;
+				-webkit-opacity: 0;
+				transition-duration: 1.3s;
+				width: 100%;
+			}
+			&:after {
+				height: 100%;
+				opacity: 0;
+				-moz-opacity: 0;
+				-khtml-opacity: 0;
+				-webkit-opacity: 0;
+				transition-duration: 1.3s;
+				width: 100%;
+			}
+		}
+	}
+}
+
+/* ---Banner Four Columns--- */
+
+/* ---Banner Various Style | Home One--- */
+.banner-various_style {
+	padding-top: 60px;
+	overflow: hidden;
+}
+
+/* ---Banner Two Columns--- */
+.banner-two_columns {
+	padding-top: 60px;
+	[class*="col-"] {
+		&:first-child {
+			@include breakpoint (max-medium) {
+				padding-bottom: 30px;
+			}
+		}
+	}
+}
+
+/* ---Banner With Content--- */
+.banner-with-content_area,
+.banner-with-content_area-2 {
+	background-image: url("../image/banner/1-9.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: 485px;
+	position: relative;
+	margin-top: -1px;
+	@include breakpoint (xx-small) {
+		min-height: 355px;
+	}
+	.jb-banner_content {
+		position: absolute;
+		right: 0;
+		width: 50%;
+		top: 50%;
+		transform: translateY(-50%);
+		@include breakpoint (x-small) {
+			width: 58%;
+		}
+		@include breakpoint (xx-small) {
+			right: 10px;
+			width: 95%;
+			top: 50%;
+			text-align: center;
+		}
+		.product-discount {
+			> span {
+				text-transform: uppercase;
+				color: $hover-color;
+				font-weight: 700;
+				padding-left: 70px;
+				letter-spacing: 3px;
+				@include breakpoint (xx-small) {
+					padding-left: 0;
+				}
+				&:before {
+					content: "";
+					position: absolute;
+					top: 7px;
+					left: 0;
+					background: $hover-color;
+					height: 3px;
+					width: 60px;
+					@include breakpoint (xx-small) {
+						display: none;
+					}
+				}
+			}
+		}
+		.product-facility {
+			padding-top: 20px;
+			> h2 {
+				font-size: 80px;
+				font-weight: 900;
+				margin-bottom: 0;
+				max-width: 580px;
+				@include breakpoint (normal) {
+					font-size: 80px;
+				}
+				@include breakpoint (max-medium) {
+					font-size: 45px;
+					padding-bottom: 15px;
+				}
+				@include breakpoint (xx-small) {
+					font-size: 28px;
+				}
+			}
+		}
+		.product-desc {
+			> p {
+				margin-bottom: 0;
+				padding-bottom: 25px;
+				max-width: 60%;
+				@include breakpoint (large) {
+					max-width: 90%;
+				}
+				@include breakpoint (max-normal) {
+					max-width: 100%;
+				}
+			}
+		}
+		.jb-btn-ps_left {
+			.jb-btn-bondi_blue {
+				@include breakpoint (xx-small) {
+					margin: 0 auto;
+				}
+			}
+		}
+	}
+}
+
+/* ---Banner With Content Two--- */
+.banner-with-content_area-2 {
+	background-image: url("../image/banner/1-12.jpg");
+	margin-top: 0;
+	.jb-banner_content {
+		left: 6.7%;
+		@include breakpoint (xx-small) {
+			width: 100%;
+			left: 0;
+		}
+		.product-facility {
+			@include breakpoint (max-medium) {
+				padding-top: 25px;
+			}
+			> h2 {
+				color: $bg-white_color;
+				padding-bottom: 5px;
+				> span {
+					font-weight: $body-font_weight;
+				}
+			}
+		}
+	}
+}
+
+/* ---Banner Three Column--- */
+.banner-three_columns {
+	padding-top: 30px;
+	[class*="col-"]:nth-child(-n + 2) {
+		@include breakpoint (max-small) {
+			padding-bottom: 30px;
+		}
+	}
+}
+
+/* ---Banner With Content Three--- */
+.banner-with-content_area-3 {
+	background-image: url("../image/banner/2-4.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: 530px;
+	position: relative;
+	margin-top: 0;
+	@include breakpoint (max-small) {
+		min-height: 320px;
+	}
+	@include breakpoint (xx-small) {
+		background-position: left;
+	}
+	.jb-banner_content {
+		width: 50%;
+		left: 13%;
+		text-align: center;
+		position: absolute;
+		top: 5%;
+		@include breakpoint (max-x_small) {
+			width: 100%;
+			left: 0;
+		}
+		@include breakpoint (max-small) {
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		> span {
+			color: $bg-white_color;
+			font-size: 16px;
+			text-transform: uppercase;
+			font-weight: 600;
+			@include breakpoint (max-small) {
+				font-size: 14px;
+			}
+		}
+		> h3 {
+			color: $bg-white_color;
+			text-transform: uppercase;
+			font-size: 90px;
+			margin-bottom: 0;
+			padding-top: 20px;
+			@include breakpoint (medium) {
+				font-size: 70px;
+			}
+			@include breakpoint (max-small) {
+				font-size: 45px;
+			}
+		}
+		> h4 {
+			color: $bg-white_color;
+			text-transform: uppercase;
+			font-size: 45px;
+			margin-bottom: 0;
+			padding-top: 20px;
+			@include breakpoint (medium) {
+				font-size: 32px;
+			}
+			@include breakpoint (max-small) {
+				font-size: 20px;
+			}
+		}
+		> h5 {
+			color: $bg-white_color;
+			margin-bottom: 0;
+			padding-top: 20px;
+		}
+		> .jb-btn-ps_center {
+			padding-top: 25px;
+		}
+	}
+}
+
+/* ---Banner With Newsletter--- */
+.banner-with_newsletter {
+	background-image: url("../image/banner/2-5.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: 350px;
+	position: relative;
+	margin-top: 60px;
+	.newsletter-content {
+		@include absCenter;
+		left: 65%;
+		text-align: center;
+		@include breakpoint (max-small) {
+			width: 50%;
+		}
+		@include breakpoint (xx-small) {
+			width: 95%;
+			left: 50%;
+		}
+		> h2 {
+			font-size: 40px;
+			text-transform: uppercase;
+			font-weight: $body-font_weight;
+			margin-bottom: 0;
+			padding-bottom: 25px;
+			@include breakpoint (max-medium) {
+				font-size: 35px;
+			}
+		}
+		> h3 {
+			font-size: 45px;
+			text-transform: uppercase;
+			margin-bottom: 0;
+			padding-bottom: 10px;
+			@include breakpoint (normal) {
+				font-size: 30px;
+			}
+			@include breakpoint (max-medium) {
+				font-size: 26px;
+			}
+		}
+		> p {
+			margin-bottom: 0;
+			padding-bottom: 25px;
+		}
+	}
+}
+
+/* ---JB's Single Banner--- */
+.jb-single-banner {
+	padding-top: 60px;
+}

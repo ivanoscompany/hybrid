@@ -1,0 +1,284 @@
+/*----------------------------------------*/
+/*  25 - Section - Footer
+/*----------------------------------------*/
+/* ---JB's Footer Area--- */
+.jb-separator_border {
+	border-top: 1px solid $border-color;
+}
+
+/* ---JB's Newsletter Area--- */
+.jb-newsletter_area {
+	background-image: url("../image/footer/bg-newletter.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	min-height: 370px;
+	.newsletter-content {
+		@include absCenter;
+		text-align: center;
+		@include breakpoint (max-small) {
+			width: 85%;
+		}
+		> h2 {
+			&.newsletter-heading {
+				font-size: 60px;
+				text-transform: uppercase;
+				font-weight: 300;
+				margin-bottom: 0;
+				padding-bottom: 20px;
+				@include breakpoint (max-small) {
+					font-size: 40px;
+				}
+			}
+		}
+		> h3 {
+			&.newsletter-sub_heading {
+				font-size: 50px;
+				@include breakpoint (max-medium) {
+					font-size: 40px;
+					margin-bottom: 0;
+					padding-bottom: 15px;
+				}
+				@include breakpoint (max-small) {
+					font-size: 30px !important;
+				}
+			}
+		}
+		> p {
+			&.short-desc {
+				margin-bottom: 0;
+				padding-bottom: 20px;
+				font-size: 16px;
+			}
+		}
+	}
+}
+/* ---JB's Newsletter Area Selection Color--- */
+.newsletter-content {
+	> h2::selection,
+	h3::selection,
+	p::selection {
+		color: $hover-color;
+	}
+}
+
+/* ---Newsletter Form Area--- */
+.newsletter-form_wrap {
+	.newsletters-form {
+		.subscribe-form {
+			position: relative;
+			input {
+				width: 100%;
+				height: 50px;
+				border: 1px solid $border-color;
+				border-radius: 25px;
+				padding: 10px 70px 10px 30px;
+			}
+			.newsletter-btn {
+				position: absolute;
+				top: 13px;
+				right: 30px;
+				left: auto;
+				background: transparent;
+				border: none;
+				font-size: 20px;
+				&:hover {
+					color: $hover-color;
+				}
+			}
+		}
+	}
+}
+
+/* ---Footer Middle Area--- */
+.footer-middle_area {
+	padding: 60px 0 55px;
+	/* ---Footer Widgets With Banner--- */
+	.footer-widgets-with_banner {
+		.widgets-banner {
+			@include breakpoint (max-medium) {
+				padding-top: 30px;
+			}
+		}
+	}
+}
+
+/* ---Footer Widgets Information--- */
+.footer-widgets_info {
+	.short-desc {
+		position: relative;
+		padding-top: 25px;
+		padding-bottom: 25px;
+		> p {
+			color: $bg-silver_color;
+			margin-bottom: 0;
+		}
+		&:before {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			background-color: $hover-color;
+			height: 2px;
+			width: 50px;
+		}
+	}
+	.widgets-essential_stuff {
+		padding-top: 30px;
+		> ul {
+			> li {
+				color: $bg-silver_color;
+				padding-bottom: 15px;
+				&:last-child {
+					padding-bottom: 0;
+				}
+				> span {
+					color: $bg-white_color;
+				}
+				> a {
+					color: $bg-silver_color;
+				}
+			}
+		}
+	}
+}
+
+/* ---JB's Social Link--- */
+.jb-social_link {
+	padding-top: 25px;
+	> ul {
+		> li {
+			display: inline-block;
+			padding-right: 10px;
+			&:last-child {
+				padding-right: 0;
+			}
+			> a {
+				width: 40px;
+				height: 40px;
+				line-height: 43px;
+				border-radius: 100%;
+				background-color: $bg-eclipse_color;
+				text-align: center;
+				color: $bg-white_color;
+				display: block;
+				&:hover {
+					color: $bg-white_color !important;
+				}
+			}
+			&:hover {
+				&.facebook {
+					> a {
+						background-color: $facebook-color;
+					}
+				}
+				&.twitter {
+					> a {
+						background-color: $twitter-color;
+					}
+				}
+				&.youtube {
+					> a {
+						background-color: $youtube-color;
+					}
+				}
+				&.google-plus {
+					> a {
+						background-color: $google-plus-color;
+					}
+				}
+				&.instagram {
+					> a {
+						background-color: $instagram-color;
+					}
+				}
+			}
+		}
+	}
+}
+
+/* ---Footer Widgets--- */
+.footer-widgets_title {
+	position: relative;
+	padding-top: 30px;
+	padding-bottom: 25px;
+	> h5 {
+		color: $bg-white_color;
+		text-transform: uppercase;
+		margin-bottom: 0;
+	}
+	&:before {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		background-color: $hover-color;
+		height: 2px;
+		width: 50px;
+	}
+}
+
+.footer-widgets {
+	padding-top: 25px;
+	> ul {
+		> li {
+			position: relative;
+			display: block;
+			padding-bottom: 15px;
+			@include transition;
+			&:last-child {
+				padding-bottom: 0;
+			}
+			&:hover {
+				padding-left: 10px;
+				> a {
+					color: $hover-color;
+					&:before {
+						color: $hover-color;
+					}
+				}
+			}
+			> a {
+				color: $bg-silver_color;
+				&:before {
+					content: "\f054";
+					font-family: 'Font Awesome\ 5 Free';
+					font-weight: 600;
+					color: $bg-silver_color;
+					font-size: 10px;
+					margin-right: 5px;
+					vertical-align: middle;
+				}
+			}
+		}
+	}
+}
+
+/* ---Footer Bottom Area--- */
+.footer-bottom_area {
+	padding: 25px 0;
+	.copyright {
+		padding-top: 5px;
+		@include breakpoint (max-small) {
+			text-align: center;
+			padding-bottom: 30px;
+		}
+		> span {
+			color: $bg-silver_color;
+			> a {
+				color: $hover-color !important;
+			}
+		}
+	}
+}
+
+/* ---Footer Payment Method--- */
+.payment {
+	text-align: right;
+	@include breakpoint (normal) {
+		text-align: center;
+	}
+	@include breakpoint (max-small) {
+		text-align: center;
+	}
+}

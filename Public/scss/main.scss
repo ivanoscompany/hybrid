@@ -1,0 +1,102 @@
+/******************************
+
+INDEX:
+
+    00 - Base - Typography
+    01 - Base - Variables
+    02 - Base - Mixins
+
+    03 - Utilities - Helper
+    04 - Utilities - Color
+
+    10 - Components - Button
+    11 - Components - Slider
+    12 - Components - Banner
+    13 - Components - Shipping
+    14 - Components - Product Tab
+    15 - Components - Special Product
+    16 - Components - List Product
+    17 - Components - Brand
+    18 - Components - Animation
+    19 - Components - Navigation
+    20 - Components - Breadcrumb
+    21 - Components - Category Product
+    22 - Components - Multiple Items Area
+    23 - Components - Product Slider
+    24 - Components - Modal
+
+    25 - Section - Header
+    26 - Section - Footer
+
+    29 - Pages - Shop
+    30 - Pages - Single Product
+    31 - Pages - Blog
+    32 - Pages - My Account
+    33 - Pages - Login | Register
+    34 - Pages - Wishlist
+    35 - Pages - Cart
+    36 - Pages - Checkout
+    37 - Pages - Compare
+    38 - Pages - Contact
+    39 - Pages - About Us
+    40 - Pages - FAQ
+    41 - Pages - 404
+
+******************************/
+
+/*
+    Body Text Color:          #333333;
+    Heading Color:            #333333;
+    Border Color:             #e5e5e5;
+    Hover Color:              #0084c5;
+    Body Font Family:         'Khula', sans-serif;
+
+*/
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Khula:300,400,600,700,800|Open+Sans:300,300i');
+
+//Base
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/typography';
+
+// Utilities
+@import 'utilities/helper';
+@import 'utilities/color';
+
+// Components
+@import 'components/button';
+@import 'components/slider';
+@import 'components/banner';
+@import 'components/shipping';
+@import 'components/product-tab';
+@import 'components/special-product';
+@import 'components/list-product';
+@import 'components/brand';
+@import 'components/animation';
+@import 'components/navigation';
+@import 'components/breadcrumb';
+@import 'components/category-product';
+@import 'components/multiple-items_area';
+@import 'components/product-slider';
+@import 'components/modal';
+
+// Section
+@import 'section/header';
+@import 'section/footer';
+
+// Pages
+@import 'pages/shop';
+@import 'pages/single-product';
+@import 'pages/blog';
+@import 'pages/my-account';
+@import 'pages/login-register';
+@import 'pages/wishlist';
+@import 'pages/cart';
+@import 'pages/checkout';
+@import 'pages/compare';
+@import 'pages/contact';
+@import 'pages/about-us';
+@import 'pages/faq';
+@import 'pages/404';

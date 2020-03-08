@@ -1,0 +1,228 @@
+/*----------------------------------------*/
+/*  03 - Utilities - Helper
+/*----------------------------------------*/
+
+/* ---JB's Preloader---*/
+.loading {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #000;
+	z-index: 9999999999999;
+}
+
+.loading .middle {
+	position: absolute;
+	top: 50%;
+	width: 100%;
+}
+
+.lds-ellipsis {
+	display: inline-block;
+	position: relative;
+	width: 64px;
+	height: 64px;
+}
+.lds-ellipsis div {
+	position: absolute;
+	top: 27px;
+	width: 11px;
+	height: 11px;
+	border-radius: 50%;
+	background: #fff;
+	animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+	left: 6px;
+	animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+	left: 6px;
+	animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+	left: 26px;
+	animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+	left: 45px;
+	animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+@keyframes lds-ellipsis3 {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
+	}
+}
+@keyframes lds-ellipsis2 {
+	0% {
+		transform: translate(0, 0);
+	}
+	100% {
+		transform: translate(19px, 0);
+	}
+}
+/* ---JB's Product Sticker---*/
+.sticker,
+.sticker-2 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 55px;
+	height: 25px;
+	line-height: 26px;
+	text-align: center;
+	background: $hover-color;
+	color: $bg-white_color;
+	border-radius: 4px;
+}
+.sticker-2 {
+	right: 0;
+	left: auto;
+}
+
+/* ---JB's Section Area--- */
+.jb-section_area {
+	background: $bg-whisper_color;
+	overflow: hidden;
+	> .section_title {
+		background: $hover-color;
+		line-height: 60px;
+		color: $bg-white_color;
+		padding: 0 30px;
+		position: relative;
+		display: inline-block;
+		margin: 0;
+		@include breakpoint (normal) {
+			font-size: 25px;
+		}
+		@include breakpoint (medium) {
+			font-size: 20px;
+			padding: 0 15px;
+		}
+		@include breakpoint (xx-small) {
+			width: 100%;
+		}
+		&:before {
+			background: transparent linear-gradient(110deg, $hover-color 50%, $bg-whisper_color 50%) repeat scroll 0 0;
+			content: "";
+			display: block;
+			height: 70px;
+			right: -25px;
+			position: absolute;
+			top: 0;
+			width: 35px;
+			z-index: 1;
+			@include breakpoint (max-small) {
+				height: 64px;
+			}
+			@include breakpoint (xx-small) {
+				display: none;
+			}
+		}
+		> span {
+			display: inline-block;
+			@include breakpoint (medium) {
+				font-size: 16px;
+			}
+			@include breakpoint (xx-small) {
+				font-size: 18px;
+			}
+			&:before {
+				display: inline-block;
+				content: "\f1da";
+				font-family: "Font Awesome 5 Free";
+				font-size: 28px;
+				font-weight: 900;
+				line-height: 60px;
+				margin-right: 10px;
+				color: $bg-white_color;
+				@include breakpoint (normal) {
+					font-size: 25px;
+				}
+				@include breakpoint (medium) {
+					font-size: 16px;
+				}
+				@include breakpoint (xx-small) {
+					font-size: 18px;
+				}
+			}
+		}
+	}
+	> .short_desc {
+		display: inline-block;
+		font-size: 20px;
+		line-height: 1;
+		margin-left: 40px;
+		margin-bottom: 0;
+		@include breakpoint (normal) {
+			font-size: 18px;
+		}
+		@include breakpoint (medium) {
+			font-size: 15px;
+			line-height: 24px;
+			margin-left: 30px;
+		}
+		@include breakpoint (max-small) {
+			padding: 20px 0 18px;
+			font-size: 16px;
+		}
+		@include breakpoint (xx-small) {
+			padding: 10px 0 8px;
+			display: block;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			margin-left: 8px;
+		}
+	}
+}
+
+/* ---JB's Section Title Two--- */
+.section_title-2 {
+	border-bottom: 1px solid $border-color;
+	> h4 {
+		text-transform: uppercase;
+		margin-bottom: 0;
+		padding-bottom: 20px;
+		@include breakpoint (normal) {
+			font-size: 18px;
+		}
+		@include breakpoint (max-small) {
+			font-size: 18px;
+			text-transform: capitalize;
+		}
+	}
+}
+
+/* ---JB's ScrollUp--- */
+#scrollUp {
+	right: 15px;
+	bottom: 15px;
+	height: 50px;
+	width: 50px;
+	line-height: 50px;
+	text-align: center;
+	overflow: hidden;
+	text-transform: uppercase;
+	background: $hover-color;
+	color: $bg-white_color;
+	border-radius: $jb-border_radius;
+	z-index: 1000 !important;
+	&:hover {
+		background: $body-text_color;
+		color: $bg-white_color !important;
+	}
+}

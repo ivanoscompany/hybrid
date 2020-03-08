@@ -1,6 +1,54 @@
 <?php 
-	require_once('../Core/custom.php');
-	class set extends custom{
+	class set{
+		
+		public function linkRun(){
+			$data = explode("/",$_SERVER['REQUEST_URI']);
+			$upOne = array_shift($data);
+			$dataCount = count($data);
+			$run = $data[0];
+			if($run == 'admin' && $dataCount == 1){
+				set::controller('Admin', 'index', 'run', json_encode([]));
+				}elseif($run == 'product' && $dataCount == 2){
+				echo 'Plugin product by name';
+			}
+			else{
+				set::controller('Index', 'index', 'run', json_encode([]));
+			}
+		}
+		
+		public function ajaxRun(){
+			set::controller(set::Post('PlugName'), 'access', 'run', null);
+			set::controller(set::Post('PlugName'), set::Post('FileName'), set::Post('Method'), set::Post('DataResult'));
+		}
+		
+		public static function plugin($pluginName, $mvc, $file){
+			return $pluginPath = str_replace("Core","Plugin",__dir__).'\\'.$pluginName.'\\'.$mvc.'\\'.$file.'.php';
+		}
+		
+		public static function controller($pluginName, $className, $methodName, $data){
+			session_start();
+			$json = str_replace('&quot;', '"', $data);
+			$getData = json_decode($json, true);
+			define("p",$pluginName);
+			self::model('Trait', 'DBModel');
+			require_once(self::plugin($pluginName, 'controller', $className));
+			$class = new $className();
+			return $class->$methodName($getData);
+		}
+		
+		public static function model($pluginName, $className = 'model'){
+			require_once(self::plugin($pluginName, 'model', $className));
+		}
+		
+		public static function view($pluginName, $fileName, $data = false){
+			if($data){
+				foreach($data as $key=>$value)
+				{
+					${$key} = $value;
+				}
+			}
+			include(self::plugin($pluginName, 'view', $fileName));
+		}
 		
 		public static function Post($Value){
 			$Method = $_POST[$Value];
@@ -9,79 +57,24 @@
 			return $Chars;
 		}
 		
-		public static function bot($Type, $Folder, $PluginName, $FileName, $Data){
-			if($Data){
-				foreach($Data as $key=>$value)
-				{
-					${$key} = $value;
-				}
-			}
-			$Path = '../Plugins/'.$PluginName.'/'.$Folder.'/'.$FileName.'.php';
-			if($Type){
-				require_once($Path);
-				} else {
-				include $Path;
-			}
-		}
-		
-		public static function Controller($PluginName, $ControllerName, $Method, $Data){
-			session_start();
-			$json = str_replace('&quot;', '"', $Data);
-			$getData = json_decode($json, true);
-			define("p",$PluginName);
-			self::Model('Trait', 'DBModel');
-			self::bot(true, 'Controller', $PluginName, $ControllerName, null);
-			$New = new $ControllerName($PluginName);
-			$New->$Method($getData);
-		}
-		
-		public static function Model($PluginName, $ModelName){
-			self::bot(true, 'Model', $PluginName, $ModelName, null);
-		}
-		
-		public static function View($PluginName, $ViewName, $Data){
-			if($PluginName === true){
-				$getPluginName = constant("p");
-			} else {
-				$getPluginName = $PluginName;
-			}
-			self::bot(false, 'View', $getPluginName, $ViewName, $Data);
-		}
-		
-		public static function Short($data, $massive){
-			$prefixError = 'Function "Short" ERROR >';
-			$dataExpolde = explode("-",$data);
-			if(count($dataExpolde) == 2){
-				if($dataExpolde[0] == 'm'){
-					if($dataExpolde[1]){
-						$nameModel = $dataExpolde[1];
-					} else {
-						$nameModel = 'Model';
-					}
-					self::Model(constant("p"), $nameModel);
-				}elseif($dataExpolde[0] == 'v'){
-					if($dataExpolde[1]){
-						$nameView = $dataExpolde[1];
-					} else {
-						$nameView = 'index';
-					}
-					self::View(constant("p"), $nameView, $massive);
-				}else{
-					echo  $prefixError.' Not the right choice of type';
-				}
-			} else {
-				echo  $prefixError.' Incorrect parameter form';
-				exit;
-			}
-		}
-		
 		public static function config($data){
 			$ini = parse_ini_file('../Config.ini');
 			return $ini[$data];
 		}
 		
-		public static function pageNotFound($name){
-			return "<b>ERROR</b> > Plugin with name: <b> $name </b> doesn't not exist";
+		public static function openMethod($data){
+			if (in_array(set::Post('Method'), $data)) {
+				return true;
+			} else {
+				set::controller('E404', 'adminIndex', 'run', null);
+			}
+		}
+		
+		public static function closeMethod($data){
+			if (in_array(set::Post('Method'), $data)) {
+				set::controller('E404', 'adminIndex', 'run', null);
+			} else {
+				return true;
+			}
 		}
 	}
-?>

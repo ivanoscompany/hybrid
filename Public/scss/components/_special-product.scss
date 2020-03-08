@@ -1,0 +1,211 @@
+/*----------------------------------------*/
+/*  15 - Components - Special Product
+/*----------------------------------------*/
+// JB's Special Product Area
+.jb-special-product_area {
+	padding-top: 60px;
+}
+
+// JB's Special Product Slider
+.jb-special-product_slider {
+	padding-top: 30px;
+	.jb-slide-item {
+		position: relative;
+		padding: 0 20px;
+		&.slick-current {
+			&:before {
+				content: "";
+				position: absolute;
+				background: $border-color;
+				height: 380px;
+				width: 1px;
+				top: 0;
+				right: 0;
+				@include breakpoint (max-small) {
+					display: none;
+				}
+			}
+		}
+		.jb-single_product {
+			.product-img {
+				float: left;
+				width: 41%;
+				@include breakpoint (medium) {
+					width: 100%;
+					float: unset;
+				}
+				@include breakpoint (small) {
+					width: 50%;
+				}
+				@include breakpoint (max-x_small) {
+					width: 100%;
+					float: unset;
+				}
+				.sticker {
+					left: 20px;
+				}
+			}
+			.jb-product_content {
+				text-align: left;
+				padding-left: 20px;
+				overflow: hidden;
+				.inner-desc {
+					> p {
+						color: $hover-color;
+						text-transform: uppercase;
+						margin-bottom: 0;
+						padding-bottom: 20px;
+					}
+				}
+				.manufacturer {
+					padding-top: 20px;
+					> a {
+						font-weight: 300;
+						text-transform: uppercase;
+					}
+				}
+				.product-name {
+					> h6 {
+						margin-bottom: 0;
+						> a {
+							padding-top: 15px;
+							font-weight: 600;
+							display: block;
+						}
+					}
+				}
+				.rating-box {
+					padding-top: 15px;
+					> ul {
+						> li {
+							display: inline-block;
+							> i {
+								font-size: 11px;
+							}
+						}
+					}
+				}
+				.product-desc {
+					padding-top: 15px;
+					> p {
+						@include breakpoint (medium) {
+							font-size: 13px;
+						}
+					}
+				}
+				.price-box {
+					@include old-price;
+					@include new-price;
+				}
+				.add-actions {
+					padding-top: 20px;
+					> ul {
+						> li {
+							.jb-add_cart {
+								width: 140px;
+								height: 40px;
+								line-height: 40px;
+								display: block;
+								border-radius: $jb-border_radius;
+								border: 1px solid $border-color;
+								text-transform: uppercase;
+								text-align: center;
+								&:hover {
+									border-color: $hover-color;
+									background-color: $hover-color;
+									color: $bg-white_color !important;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+/* ---JB's Countdown--- */
+.jb-countdown {
+	.count {
+		display: inline-block;
+		text-align: center;
+		padding: 10px 0;
+		width: 60px;
+		background: $white-smoke_color;
+		border: 1px solid $border-color;
+		border-radius: $jb-border_radius;
+		margin-right: 6px;
+		@include breakpoint (normal) {
+			width: 50px;
+		}
+		@include breakpoint (max-small) {
+			width: 40px;
+			padding: 5px 0;
+		}
+		.count-amount {
+			display: block;
+			font-size: 24px;
+			position: relative;
+			@include breakpoint (normal) {
+				font-size: 20px;
+			}
+			@include breakpoint (max-small) {
+				font-size: 16px;
+			}
+		}
+		.count-period {
+			display: block;
+			font-size: 13px;
+			line-height: 15px;
+			color: $dim-gray_color;
+			text-transform: capitalize;
+		}
+	}
+}
+
+/* ---JB's Special Product Slider Dots--- */
+.jb-special-product_slider,
+.jb-list-product_slider {
+	@include jb-slick_dots;
+	.slick-dots {
+		top: 0;
+		right: 0;
+		left: auto;
+		transform: translate(-15px, -45px);
+		padding: 0;
+		@include breakpoint (small) {
+			transform: translate(-15px, -106px);
+		}
+		@include breakpoint (max-x_small) {
+			display: none !important;
+		}
+		li {
+			display: inline-block;
+			margin: 0 3px;
+			cursor: pointer;
+			font-size: 0;
+			width: 10px;
+			height: 10px;
+			background: transparent;
+			border: 1px solid $hover-color;
+			border-radius: 100%;
+			transition: all 300ms ease-in;
+			&.slick-active {
+				background-color: $hover-color;
+				width: 25px;
+				border-radius: 4px;
+			}
+			&:hover {
+				background-color: $hover-color;
+			}
+		}
+	}
+}
+
+/* ---JB's List Product Slider Dots--- */
+.jb-list-product_slider {
+	.slick-dots {
+		-webkit-transform: translate(0, -52px);
+		transform: translate(0, -52px);
+	}
+}

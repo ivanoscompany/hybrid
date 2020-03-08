@@ -1,0 +1,45 @@
+/*----------------------------------------*/
+/*  13 - Components - Shipping
+/*----------------------------------------*/
+// JB's Shipping Area
+.jb-shipping_area {
+	padding-top: 60px;
+	[class*="col-"] {
+		&:first-child {
+			@include breakpoint (medium) {
+				margin-bottom: 30px;
+			}
+		}
+		@include breakpoint (max-small) {
+			margin-bottom: 30px;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+		@include breakpoint (small) {
+			&:nth-last-child(-n + 2) {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+// Shipping Information
+.shipping-info {
+	border: 2px solid #e5e5e5;
+	border-radius: 3px;
+	text-align: center;
+	padding: 30px 0;
+	background: #f4f4f4;
+	@include transition;
+	&:hover {
+		background-color: #ffffff;
+	}
+	.shipping-icon {
+		font-size: 30px;
+		color: #0084c5;
+	}
+	.shipping-text {
+		padding-top: 17px;
+	}
+}

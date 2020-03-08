@@ -1,0 +1,115 @@
+/*----------------------------------------*/
+/*  00 - Base - Typography
+/*----------------------------------------*/
+
+body {
+	font-family: $body-font;
+	color: $body-text_color;
+	font-size: $body-font-size;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: $heading-font;
+	color: $heading-color;
+	font-weight: $heading-font_weight;
+}
+
+p {
+	font-family: $body-font;
+	color: $body-text_color;
+	font-size: $body-font-size;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type=number] {
+	-moz-appearance: textfield;
+}
+
+input {
+	color: $input-placeholder_color;
+}
+
+input::placeholder {
+	color: $input-placeholder_color;
+}
+
+._keyfocus :focus,
+input:not([disabled]):focus,
+textarea:not([disabled]):focus,
+select:not([disabled]):focus {
+	outline: 0;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+img {
+	max-width: 100%;
+}
+
+.img-full {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	display: block;
+}
+
+a,
+button {
+	@include transition;
+}
+
+a {
+	color: $body-text_color;
+	&:hover {
+		color: $hover-color !important;
+		text-decoration: none;
+	}
+	&:not([href]):not([tabindex]) {
+		&:hover {
+			color: $hover-color;
+		}
+	}
+}
+
+a,
+a:hover,
+a:focus,
+a:active,
+button,
+button:focus,
+input,
+select,
+textarea,
+.slick-slide {
+	outline: none;
+}
+
+button {
+	cursor: pointer;
+	border: none;
+	padding: 0;
+	outline: none;
+	background: transparent;
+}
+
+/* ---JB's Default Youtube & Soundcloud Height--- */
+.embed-responsive {
+	min-height: 220px;
+	@include breakpoint(normal) {
+		min-height: 180px;
+	}
+}

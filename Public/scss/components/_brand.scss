@@ -1,0 +1,42 @@
+/*----------------------------------------*/
+/*  17 - Components - Brand
+/*----------------------------------------*/
+/* ---JB's Brand Area--- */
+.jb-brand_area {
+	padding: 55px 0;
+	border-top: 1px solid $border-color;
+}
+
+/* ---JB's Brand Slider--- */
+.jb-brand_slider {
+	.slide-item {
+		overflow: hidden;
+		> a {
+			display: block;
+			> img {
+				-webkit-transition: all 300ms ease-in-out;
+				-moz-transition: all 300ms ease-in-out;
+				-ms-transition: all 300ms ease-in-out;
+				-o-transition: all 300ms ease-in-out;
+				transition: all 300ms ease-in-out;
+				-moz-transform: scale3d(1, 1, 1);
+				-webkit-transform: scale3d(1, 1, 1);
+				-o-transform: scale3d(1, 1, 1);
+				-ms-transform: scale3d(1, 1, 1);
+				transform: scale3d(1, 1, 1);
+			}
+		}
+		&:hover {
+			-webkit-transition: all 300ms ease-in-out;
+			-moz-transition: all 300ms ease-in-out;
+			-ms-transition: all 300ms ease-in-out;
+			-o-transition: all 300ms ease-in-out;
+			transition: all 300ms ease-in-out;
+			-moz-transform: scale3d(1.05, 1.05, 1.05);
+			-webkit-transform: scale3d(1.05, 1.05, 1.05);
+			-o-transform: scale3d(1.05, 1.05, 1.05);
+			-ms-transform: scale3d(1.05, 1.05, 1.05);
+			transform: scale3d(1.05, 1.05, 1.05);
+		}
+	}
+}

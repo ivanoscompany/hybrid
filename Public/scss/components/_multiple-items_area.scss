@@ -1,0 +1,82 @@
+/*----------------------------------------*/
+/*  22 - Components - Multiple Items
+/*----------------------------------------*/
+.multiple-items_area {
+	padding: 60px 0 0;
+	@include breakpoint (normal) {
+		margin-bottom: -25px;
+	}
+	.category-menu {
+		@include breakpoint (medium) {
+			padding-top: 0;
+		}
+		.category-heading {
+			> h2 {
+				&:before {
+					@include breakpoint (normal) {
+						right: 15px;
+					}
+				}
+			}
+		}
+		.category-menu-list {
+			border: 1px solid $border-color;
+			> ul {
+				> li {
+					> a {
+						padding: 19.5px 20px 19.5px 20px;
+						@include breakpoint (normal) {
+							padding: 13.5px 20px 13.5px 20px;
+						}
+					}
+				}
+			}
+		}
+	}
+	.jb-banner_area {
+		.banner-item {
+			@include breakpoint (max-small) {
+				padding-bottom: 30px;
+			}
+		}
+	}
+	.sub-section_space {
+		padding-bottom: 30px;
+		@include breakpoint (max-small) {
+			padding-bottom: 0;
+		}
+	}
+	.section_title-2 {
+		@include breakpoint (medium) {
+			padding-top: 30px;
+		}
+	}
+	.jb-list-product_slider {
+		.jb-slide-item {
+			.jb-single_product {
+				padding-top: 25px;
+				&:last-child {
+					@include breakpoint (max-medium) {
+						margin-bottom: -25px;
+					}
+				}
+				@include breakpoint (normal) {
+					padding-top: 20px;
+				}
+				.jb-product_content {
+					.product-name {
+						h6 {
+							font-weight: 400;
+							display: block;
+							white-space: nowrap;
+							text-overflow: ellipsis;
+							overflow: hidden;
+							margin-bottom: 0;
+							padding-bottom: 10px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
