@@ -54,21 +54,25 @@
 		public function dbWhere($data, $TableName){
 			if($data){
 				$WhereString .= ' WHERE ';
-				foreach($data as $key=>$value)
-				{	
-					if(is_numeric ($key)){
-						$getColWithNumber = $this->dbColumns($key, $TableName);
-						$WhereString .= ' '.$getColWithNumber.'="'.$value.'" AND';
+				if(is_array($data)){
+					foreach($data as $key=>$value){	
+						if(is_numeric ($key)){
+							$getColWithNumber = $this->dbColumns($key, $TableName);
+							$WhereString .= ' '.$getColWithNumber.'="'.$value.'" AND';
 						}else{
-						$WhereString .= ' '.$key.'="'.$value.'" AND';
+							$WhereString .= ' '.$key.'="'.$value.'" AND';
+						}
 					}
+					$getStringWhere = substr_replace($WhereString, "", -3);
+					return $getStringWhere;
+				} else {
+					return $WhereString .= $data;
 				}
-				$getStringWhere = substr_replace($WhereString, "", -3);
-				return $getStringWhere;
 			}
 		}
 		
 		public function dbSort($data){
+			$mysqli = new mysqli(set::config('db_host'), set::config('db_user'), set::config('db_password'), set::config('db_table'));
 			if($data){
 				$OrderString .= ' ORDER BY ';
 				foreach($data as $key=>$value)
@@ -80,7 +84,7 @@
 						$OrderSort = 'DESC';
 						$separator = ' ';
 						} else{
-						$OrderSort='"'.htmlspecialchars($value).'"';
+						$OrderSort='"'.$mysqli->real_escape_string($value).'"';
 						$separator = '=';
 					}
 					if(is_numeric ($key)){
@@ -188,13 +192,14 @@
 		}
 		
 		public function dbiAttr($data, $remove){
+			$mysqli = new mysqli(set::config('db_host'), set::config('db_user'), set::config('db_password'), set::config('db_table'));
 			if($data){
 				foreach($data as $key=>$value)
 				{
 					if($remove){
-						$backRemove = ''.htmlspecialchars($value).', ';
+						$backRemove = ''.$mysqli->real_escape_string($value).', ';
 						} else {
-						$backRemove = '"'.htmlspecialchars($value).'", ';
+						$backRemove = '"'.$mysqli->real_escape_string($value).'", ';
 					}
 					$columnCode .= $backRemove;
 				}
@@ -207,8 +212,8 @@
 		}
 		
 		public function dbi($tableName, $column, $value, $debugMode = false){
-			$Result = 'INSERT INTO '.$tableName.' ('.$tableName.'_id, ';
-			$Result .= $this->dbiAttr($column, true).' ) VALUES ('.$this->setDna().', ';
+			$Result = 'INSERT INTO '.$tableName.' ( ';
+			$Result .= $this->dbiAttr($column, true).' ) VALUES ( ';
 			$Result .= $this->dbiAttr($value, false).' )';
 			if($debugMode){
 				echo $Result;

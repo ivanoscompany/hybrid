@@ -4264,7 +4264,7 @@ li.right-menu .cat-mega-menu-3 > li {
   padding-right: 0;
 }
 
-.hm-menu > nav > ul > li:hover > button {
+.hm-menu > nav > ul > li:hover > a {
   color: #0084C5;
 }
 
@@ -4383,12 +4383,12 @@ li.right-menu .cat-mega-menu-3 > li {
   font-size: 16px;
 }
 
-.hm-menu > nav > ul > li > button {
+.hm-menu > nav > ul > li > a {
   display: block;
+  padding: 40px 0;
   font-size: 15px;
+  font-weight: bold;
   text-transform: uppercase;
-  margin-top: 20px;
-  color: #FFFFFF;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -5552,7 +5552,6 @@ li.right-menu .cat-mega-menu-3 > li {
 }
 
 .paginatoin-area .product-select-box .product-short span {
-  padding-left: 15px;
 }
 
 .paginatoin-area .pagination-box {

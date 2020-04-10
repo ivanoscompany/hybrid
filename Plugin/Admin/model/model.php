@@ -3,8 +3,16 @@
 		
 		use DBModel;
 		
-		public function test(){
-			return $this->dbsCode('mytable', ['value1'=>'test'], ['value1'=>false], '1,3');
+		public function add_new_blog_model($table, $value){
+			return $this->dbi($table, ['blog_name', 'blog_link'], [$value, set::letTrans($value)]);
+		}
+		
+		public function blog_model($table){
+			return $this->dbs($table);
+		}
+		
+		public function remove_blog_model($table, $id){
+			return $this->dbd($table, ['blog_id'=>$id]);
 		}
 		
 	}	

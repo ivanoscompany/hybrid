@@ -1,4 +1,4 @@
 <?php
-require_once('../Core/set.php');
-set::linkRun();
+require_once('../set.php');
+set::run();
 ?>

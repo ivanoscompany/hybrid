@@ -1,23 +1,30 @@
 <nav class="navbar navbar-dark bg-primary">
-	<button type="button" class="btn btn-primary" onclick="run()">Home</button>
-	<a class="navbar-brand" href="#">SIMPLE LOGIN</a>
+	<a href="/" type="button" class="btn btn-primary">Към сайта</a>
+	<a class="navbar-brand" href="#">ВХОД</a>
 </nav>
 <div class="container">
 	<div class="row">
 		<div class="col-sm"></div>
 		<div class="col-sm">
-			<h2 class="text-center">Sing in</h2>
+			<h2 class="text-center">Вписване</h2>
 			<div class="jumbotron">
 				<div class="form-group">
-					<label for="exampleInputEmail1">Username</label>
+					<label for="exampleInputEmail1">Потребител</label>
 					<input class="form-control username" type="text" placeholder="">
 					<small id="emailHelp" class="form-text text-muted"></small>
 				</div>
 				<div class="form-group">
-					<label for="exampleInputPassword1">Password</label>
+					<label for="exampleInputPassword1">Парола</label>
 					<input type="password" class="form-control password" id="exampleInputPassword1">
 				</div>
-				<button type="submit" class="btn btn-primary" onclick="run('login', 'Admin', {user:$('.username').val(),pass:$('.password').val()})">Login</button>
+				<button type="submit" class="btn btn-primary" onclick="run({
+					plugin:'Admin',
+					method:'login',
+					massive:{
+						user:$('.username').val(),
+						pass:$('.password').val()
+					}
+				})">Login</button>
 			</div>
 		</div>
 		<div class="col-sm"></div>
